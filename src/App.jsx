@@ -43,13 +43,15 @@ const colors = {
   branco: '#FFFFFF'
 };
 
+const ASSET_BASE = `${import.meta.env.BASE_URL}assets`;
+
 const LogoMark = ({ size = 40, iconSize = 26, className = '' }) => (
   <div
     className={`relative flex items-center justify-center rounded-full overflow-hidden shrink-0 ${className}`}
     style={{ width: size, height: size, backgroundColor: colors.lilas, border: `1px solid ${colors.lilas}` }}
   >
     <img
-      src="/assets/icons/Creme.png"
+      src={`${ASSET_BASE}/icons/Creme.png`}
       alt="Logo da marca"
       className="w-[88%] h-[88%] object-contain"
       style={{ width: iconSize, height: iconSize }}
@@ -252,7 +254,7 @@ const App = () => {
               {/* Borda interna sutil e elegante */}
               <div className="absolute inset-0 border-2 border-white/30 rounded-3xl z-20 m-3 pointer-events-none"></div>
               <img
-              src="/assets/images/IMG_2557.jpg.jpg"
+              src={`${ASSET_BASE}/images/IMG_2557.jpg.jpg`}
               alt="Dra. Camila Barcelos"
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
@@ -268,7 +270,7 @@ const App = () => {
           <AnimatedSection direction="left" className="order-2 md:order-1 relative">
             <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl" style={{ backgroundColor: colors.rosa, opacity: 0.3 }}></div>
             <img 
-              src="/assets/images/IMG_2518.jpg.jpg" 
+              src={`${ASSET_BASE}/images/IMG_2518.jpg.jpg`} 
               alt="Dra. Camila Barcelos 2" 
               className="relative z-10 w-full max-w-md mx-auto aspect-[4/5] object-cover rounded-3xl shadow-lg"
             />
@@ -472,7 +474,7 @@ const App = () => {
           <AnimatedSection direction="right" delay={200} className="relative">
             <div className="aspect-square md:aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
               <img 
-                src="/assets/images/IMG_2611.jpg.jpg"
+                src={`${ASSET_BASE}/images/IMG_2611.jpg.jpg`}
                 alt="Médica em consulta" 
                 className="w-full h-full object-cover"
               />
