@@ -5,4 +5,15 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/projeto-camila-barcelos/',
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        format: 'es',
+      },
+    },
+  },
+  server: {
+    port: 3000,
+    strictPort: true,
+  },
 })
