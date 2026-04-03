@@ -6,6 +6,7 @@ export default defineConfig(({ command }) => ({
   base: command === 'serve' ? '/' : '/projeto-camila-barcelos/',
   plugins: [react()],
   build: {
+    outDir: 'docs',
     rollupOptions: {
       output: {
         format: 'es',
