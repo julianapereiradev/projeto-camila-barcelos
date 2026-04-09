@@ -73,7 +73,7 @@ const AnimatedSection = ({ children, className = "", direction = "up", delay = 0
         }
       });
     }, { threshold: 0.1 });
-    
+
     const currentRef = domRef.current;
     if (currentRef) observer.observe(currentRef);
     return () => {
@@ -88,9 +88,8 @@ const AnimatedSection = ({ children, className = "", direction = "up", delay = 0
   return (
     <div
       ref={domRef}
-      className={`transition-all duration-1000 ease-out ${className} ${
-        isVisible ? "opacity-100 translate-y-0 translate-x-0" : `opacity-0 ${transformClass}`
-      }`}
+      className={`transition-all duration-1000 ease-out ${className} ${isVisible ? "opacity-100 translate-y-0 translate-x-0" : `opacity-0 ${transformClass}`
+        }`}
       style={{ transitionDelay: `${delay}ms`, ...style }}
     >
       {children}
@@ -104,19 +103,19 @@ const FAQItem = ({ question, answer }) => {
 
   return (
     <div className="border mb-4 rounded-2xl overflow-hidden transition-all duration-300" style={{ borderColor: isOpen ? colors.lilas : '#e2e8f0', backgroundColor: colors.branco }}>
-      <button 
+      <button
         className="w-full text-left p-6 flex justify-between items-center font-serif text-lg focus:outline-none"
         onClick={() => setIsOpen(!isOpen)}
         style={{ color: colors.lilas }}
       >
         <span className="pr-4">{question}</span>
-        <ChevronDown 
-          size={20} 
-          className={`transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
+        <ChevronDown
+          size={20}
+          className={`transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180' : ''}`}
           style={{ color: colors.azul }}
         />
       </button>
-      <div 
+      <div
         className={`px-6 text-slate-600 transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
       >
         {answer}
@@ -148,12 +147,11 @@ const App = () => {
 
   return (
     <div className="font-sans text-slate-700 min-h-screen" style={{ backgroundColor: colors.creme }}>
-      
+
       {/* HEADER / NAVBAR */}
-      <header 
-        className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'shadow-md py-3' : 'py-5'
-        }`}
+      <header
+        className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-md py-3' : 'py-5'
+          }`}
         style={{ backgroundColor: colors.branco }}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -172,7 +170,7 @@ const App = () => {
             <button onClick={() => scrollToSection('tratamentos')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Tratamentos</button>
             <button onClick={() => scrollToSection('atendimento')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Atendimento</button>
             <button onClick={() => scrollToSection('faq')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Dúvidas</button>
-            <button 
+            <button
               onClick={() => scrollToSection('contato')}
               className="px-6 py-2.5 rounded-full text-white text-sm font-medium transition-transform hover:scale-105 shadow-sm flex items-center gap-2"
               style={{ backgroundColor: colors.lilas }}
@@ -183,8 +181,8 @@ const App = () => {
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <button 
-            className="lg:hidden p-2" 
+          <button
+            className="lg:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{ color: colors.lilas }}
           >
@@ -200,7 +198,7 @@ const App = () => {
               <button onClick={() => scrollToSection('tratamentos')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Tratamentos</button>
               <button onClick={() => scrollToSection('atendimento')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Atendimento</button>
               <button onClick={() => scrollToSection('faq')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Dúvidas</button>
-              <button 
+              <button
                 onClick={() => scrollToSection('contato')}
                 className="mt-2 py-3 rounded-full text-white text-sm font-medium flex justify-center items-center gap-2"
                 style={{ backgroundColor: colors.lilas }}
@@ -215,8 +213,16 @@ const App = () => {
 
       {/* HERO SECTION */}
       <section id="home" className="pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden relative" style={{ backgroundColor: colors.creme }}>
-        <div className="absolute top-20 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30" style={{ backgroundColor: colors.rosa }}></div>
-        <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-20" style={{ backgroundColor: colors.azul }}></div>
+        {/* Imagem decorativa atrás do texto à esquerda */}
+        <img
+          src={`${ASSET_BASE}/icons/Branco.png`}
+          alt=""
+          aria-hidden="true"
+          className="absolute left-0 top-[55%] -translate-y-1/2 h-auto w-auto object-contain pointer-events-none select-none"
+          style={{ opacity: 1.0, maxHeight: '75%', maxWidth: '35%' }}
+        />
+        <div className="absolute top-20 right-0 w-96 h-96 rounded-full filter blur-3xl opacity-25" style={{ backgroundColor: colors.rosa }}></div>
+        <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full filter blur-3xl opacity-15" style={{ backgroundColor: colors.creme }}></div>
 
         <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center relative z-10">
           <AnimatedSection direction="left" className="flex flex-col justify-center max-w-xl">
@@ -230,7 +236,7 @@ const App = () => {
               Atendimento endocrinológico focado em promover um funcionamento saudável do seu corpo, desenvolvendo qualidade de vida e serenidade para a sua rotina.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button 
+              <button
                 onClick={() => scrollToSection('contato')}
                 className="px-8 py-3.5 rounded-full text-white font-medium transition-all hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2"
                 style={{ backgroundColor: colors.lilas }}
@@ -238,7 +244,7 @@ const App = () => {
                 Agendar Avaliação
                 <ChevronRight size={18} />
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('sobre')}
                 className="px-8 py-3.5 rounded-full font-medium transition-all hover:bg-slate-50 hover:-translate-y-1 flex items-center justify-center"
                 style={{ color: colors.azul, border: `1.5px solid ${colors.azul}` }}
@@ -250,14 +256,14 @@ const App = () => {
 
           {/* Hero Image */}
           <AnimatedSection direction="right" delay={200} className="relative flex justify-center md:justify-end mt-8 md:mt-0">
-            <div className="relative w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl" style={{ maxWidth: '22rem' }}>
               {/* Borda interna sutil e elegante */}
               <div className="absolute inset-0 border-2 border-white/30 rounded-3xl z-20 m-3 pointer-events-none"></div>
               <img
-              src={`${ASSET_BASE}/images/IMG_2557.jpg.jpg`}
-              alt="Dra. Camila Barcelos"
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-            />
+                src={`${ASSET_BASE}/images/IMG_2557.jpg.jpg`}
+                alt="Dra. Camila Barcelos"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
             </div>
           </AnimatedSection>
         </div>
@@ -266,17 +272,17 @@ const App = () => {
       {/* SOBRE MIM SECTION */}
       <section id="sobre" className="py-20 md:py-32 overflow-hidden" style={{ backgroundColor: colors.branco }}>
         <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-16 items-center">
-          
+
           <AnimatedSection direction="left" className="order-2 md:order-1 relative">
             <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl" style={{ backgroundColor: colors.rosa, opacity: 0.3 }}></div>
-            <img 
-              src={`${ASSET_BASE}/images/IMG_2518.jpg.jpg`} 
-              alt="Dra. Camila Barcelos 2" 
+            <img
+              src={`${ASSET_BASE}/images/IMG_2571.jpg.jpg`}
+              alt="Dra. Camila Barcelos 2"
               className="relative z-10 w-full max-w-md mx-auto aspect-[4/5] object-cover rounded-3xl shadow-lg"
             />
             <svg className="absolute -top-10 -left-10 w-24 h-24 opacity-50 z-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 90 Q 50 10 90 90" stroke={colors.azul} strokeWidth="2" fill="none"/>
-              <path d="M30 90 Q 50 30 70 90" stroke={colors.rosa} strokeWidth="2" fill="none"/>
+              <path d="M10 90 Q 50 10 90 90" stroke={colors.azul} strokeWidth="2" fill="none" />
+              <path d="M30 90 Q 50 30 70 90" stroke={colors.rosa} strokeWidth="2" fill="none" />
             </svg>
           </AnimatedSection>
 
@@ -285,7 +291,7 @@ const App = () => {
             <h3 className="text-3xl md:text-4xl font-serif mb-6" style={{ color: colors.lilas }}>
               Uma trajetória dedicada a cuidar da sua saúde integral.
             </h3>
-            
+
             <div className="space-y-4 text-slate-600 leading-relaxed mb-8">
               <p>
                 Olá! Sou a <strong>Dra. Camila Barcelos</strong>, médica endocrinologista. Acredito que a medicina vai muito além de solicitar exames e prescrever medicações; trata-se de escutar ativamente e compreender o seu momento de vida.
@@ -337,10 +343,10 @@ const App = () => {
                   Metabolismo e Peso
                 </h4>
                 <ul className="space-y-3 text-slate-600 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }}/> Tratamento da Obesidade</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }}/> Dificuldade de Emagrecimento</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }}/> Síndrome Metabólica</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }}/> Ganho de Massa Magra</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Tratamento da Obesidade</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Dificuldade de Emagrecimento</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Síndrome Metabólica</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Ganho de Massa Magra</li>
                 </ul>
               </div>
             </AnimatedSection>
@@ -352,10 +358,10 @@ const App = () => {
                   Doenças Crônicas
                 </h4>
                 <ul className="space-y-3 text-slate-600 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }}/> Diabetes Tipo 1 e Tipo 2</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }}/> Pré-diabetes</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }}/> Colesterol Alto (Dislipidemia)</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }}/> Esteatose Hepática (Gordura no fígado)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Diabetes Tipo 1 e Tipo 2</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Pré-diabetes</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Colesterol Alto (Dislipidemia)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Esteatose Hepática (Gordura no fígado)</li>
                 </ul>
               </div>
             </AnimatedSection>
@@ -367,10 +373,10 @@ const App = () => {
                   Hormônios e Ossos
                 </h4>
                 <ul className="space-y-3 text-slate-600 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }}/> Hipotireoidismo e Hipertireoidismo</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }}/> Menopausa e Reposição Hormonal</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }}/> Osteoporose e Osteopenia</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }}/> SOP (Síndrome dos Ovários Policísticos)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Hipotireoidismo e Hipertireoidismo</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Menopausa e Reposição Hormonal</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Osteoporose e Osteopenia</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> SOP (Síndrome dos Ovários Policísticos)</li>
                 </ul>
               </div>
             </AnimatedSection>
@@ -399,9 +405,9 @@ const App = () => {
                 Atendimento no consultório no <strong>Rio de Janeiro</strong>, com toda a estrutura necessária para avaliações físicas completas, como a bioimpedância.
               </p>
               <ul className="space-y-3 text-sm text-slate-700 mb-8 font-medium">
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }}/> Ambiente acolhedor e acessível</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }}/> Sem pressa no atendimento</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }}/> Estacionamento no local</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }} /> Ambiente acolhedor e acessível</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }} /> Sem pressa no atendimento</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }} /> Estacionamento no local</li>
               </ul>
               <button onClick={() => scrollToSection('contato')} className="w-full py-3 rounded-full text-white font-medium transition-transform hover:scale-105" style={{ backgroundColor: colors.lilas }}>
                 Agendar Presencial
@@ -419,9 +425,9 @@ const App = () => {
                 Atendimento online para <strong>todo o Brasil</strong> e exterior. Ideal para pacientes de outras cidades, acompanhamentos contínuos e retornos.
               </p>
               <ul className="space-y-3 text-sm text-white/90 mb-8 font-medium relative z-10">
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white"/> Disponível de qualquer lugar</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white"/> Receitas e pedidos de exames digitais</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white"/> Conforto e praticidade da sua casa</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white" /> Disponível de qualquer lugar</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white" /> Receitas e pedidos de exames digitais</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white" /> Conforto e praticidade da sua casa</li>
               </ul>
               <button onClick={() => scrollToSection('contato')} className="w-full py-3 rounded-full font-medium transition-transform hover:scale-105 relative z-10" style={{ backgroundColor: colors.branco, color: colors.azul }}>
                 Agendar Online
@@ -439,7 +445,7 @@ const App = () => {
             <h3 className="text-3xl md:text-5xl font-serif mb-8" style={{ color: colors.lilas }}>
               O que esperar do nosso encontro?
             </h3>
-            
+
             <div className="space-y-6 text-slate-600">
               <div>
                 <h4 className="font-bold text-lg mb-2 flex items-center gap-2" style={{ color: colors.lilas }}>
@@ -473,9 +479,9 @@ const App = () => {
 
           <AnimatedSection direction="right" delay={200} className="relative">
             <div className="aspect-square md:aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
-              <img 
+              <img
                 src={`${ASSET_BASE}/images/IMG_2611.jpg.jpg`}
-                alt="Médica em consulta" 
+                alt="Médica em consulta"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -498,7 +504,7 @@ const App = () => {
               <p className="text-slate-600 mb-8">
                 Não encontrou o que procurava? Entre em contato pelo WhatsApp. Terei o maior prazer em conversar e explicar como minha abordagem pode te ajudar.
               </p>
-              <button 
+              <button
                 onClick={() => scrollToSection('contato')}
                 className="flex items-center gap-2 font-medium transition-colors hover:opacity-70"
                 style={{ color: colors.azul }}
@@ -509,20 +515,20 @@ const App = () => {
 
             <AnimatedSection direction="up" delay={200} className="lg:col-span-8">
               <div className="space-y-4">
-                <FAQItem 
-                  question="A Dra. atende por planos de saúde (convênio)?" 
+                <FAQItem
+                  question="A Dra. atende por planos de saúde (convênio)?"
                   answer="Meus atendimentos são particulares, pois prezo por consultas longas, humanizadas e sem a pressa imposta pelos planos. No entanto, fornecemos Nota Fiscal para que você possa solicitar o reembolso junto ao seu convênio médico, se o seu plano permitir."
                 />
-                <FAQItem 
-                  question="Como funciona a Teleconsulta?" 
+                <FAQItem
+                  question="Como funciona a Teleconsulta?"
                   answer="A teleconsulta é realizada por vídeo em uma plataforma segura e fácil de usar. Tem a mesma duração e qualidade da consulta presencial. Todas as receitas, laudos e pedidos de exames são enviados com certificação digital, sendo válidos em todo o território nacional."
                 />
-                <FAQItem 
-                  question="Preciso levar exames prontos na primeira consulta?" 
+                <FAQItem
+                  question="Preciso levar exames prontos na primeira consulta?"
                   answer="Não é obrigatório! Na primeira consulta eu faço uma avaliação clínica profunda. Se você já tiver exames recentes (dos últimos 6 meses), leve-os. Caso não tenha, farei a solicitação dos exames específicos e necessários após entender o seu caso clínico."
                 />
-                <FAQItem 
-                  question="Quais as formas de pagamento?" 
+                <FAQItem
+                  question="Quais as formas de pagamento?"
                   answer="Aceitamos pagamentos via PIX, transferência bancária e cartões de crédito. Os detalhes podem ser confirmados diretamente com nossa equipe de agendamento via WhatsApp."
                 />
               </div>
@@ -535,10 +541,10 @@ const App = () => {
       <section id="contato" className="py-20 md:py-24 overflow-hidden" style={{ backgroundColor: colors.lilas }}>
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col lg:flex-row items-center gap-16 rounded-3xl overflow-hidden p-8 md:p-12 relative" style={{ backgroundColor: '#ffffff10' }}>
-            
+
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full mix-blend-overlay filter blur-3xl opacity-50" style={{ backgroundColor: colors.rosa }}></div>
             <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full mix-blend-overlay filter blur-3xl opacity-30" style={{ backgroundColor: colors.azul }}></div>
-            
+
             <AnimatedSection direction="left" className="lg:w-1/2 text-white relative z-10">
               <h2 className="text-3xl md:text-5xl font-serif mb-6 leading-tight">
                 Cuidado e qualidade de vida para quem é importante pra você.
@@ -546,7 +552,7 @@ const App = () => {
               <p className="text-white/80 mb-10 text-lg">
                 Ofereça a si mesma a segurança de um acompanhamento médico que valoriza o bem-estar em cada detalhe.
               </p>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: colors.branco, color: colors.lilas }}>
@@ -554,10 +560,10 @@ const App = () => {
                   </div>
                   <div>
                     <h5 className="font-semibold text-lg">Endereço (Presencial)</h5>
-                    <p className="text-white/80">R. Visc. de Ouro Preto, 5 - Sala XXXX<br/>Botafogo, Rio de Janeiro - RJ, 22250-180</p>
+                    <p className="text-white/80">R. Visc. de Ouro Preto, 5 - Sala XXXX<br />Botafogo, Rio de Janeiro - RJ, 22250-180</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: colors.branco, color: colors.lilas }}>
                     <Clock size={20} />
@@ -597,7 +603,7 @@ const App = () => {
       <footer className="pt-16 pb-8" style={{ backgroundColor: colors.branco }}>
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-12 border-b pb-12" style={{ borderColor: colors.creme }}>
-            
+
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
               <div className="flex items-center gap-2 mb-4">
                 <LogoMark size={32} iconSize={24} />
@@ -618,7 +624,7 @@ const App = () => {
                   <li><button onClick={() => scrollToSection('atendimento')} className="hover:text-slate-800">Atendimento</button></li>
                 </ul>
               </div>
-              
+
               <div>
                 <h6 className="font-bold mb-4" style={{ color: colors.azul }}>Contato Direto</h6>
                 <ul className="space-y-3 text-sm text-slate-500">
