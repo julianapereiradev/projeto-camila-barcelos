@@ -294,30 +294,37 @@ const App = () => {
 
             <div className="space-y-4 text-slate-600 leading-relaxed mb-8">
               <p>
-                Olá! Sou a <strong>Dra. Camila Barcelos</strong>, médica endocrinologista. Acredito que a medicina vai muito além de solicitar exames e prescrever medicações; trata-se de escutar ativamente e compreender o seu momento de vida.
+                Olá! Sou a <strong>Dra. Camila Barcelos</strong>, médica endocrinologista. Acredito que a medicina vai além de exames e prescrições — envolve escuta ativa e compreensão do seu momento de vida.
               </p>
               <p>
-                Desde o início da minha formação, percebi a importância de olhar o paciente como um todo. Meu objetivo é traduzir o funcionamento dos seus hormônios e metabolismo de forma clara, trazendo acolhimento para as suas dúvidas e construindo decisões com embasamento científico.
+                Desde o início da minha formação, aprendi a olhar o paciente de forma integral. Meu objetivo é entender seu organismo, avaliar metabolismo e hormônios com clareza, acolher suas dúvidas e tomar decisões com base científica.
               </p>
               <p>
-                Realizar o atendimento endocrinológico é organizar o cuidado médico para que você recupere sua vitalidade, auto-estima e, acima de tudo, a sua qualidade de vida.
+                O atendimento endocrinológico organiza o seu cuidado de forma individualizada, ajudando você a recuperar vitalidade, autoestima e qualidade de vida.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-2xl border" style={{ borderColor: colors.creme, backgroundColor: '#ffffff' }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: colors.creme, color: colors.azul }}>
+                  <Activity size={20} />
+                </div>
+                <h4 className="font-serif font-medium text-slate-800">Residência Médica</h4>
+                <p className="text-sm text-slate-500">Endocrinologia e Metabologia — UERJ</p>
+              </div>
+              <div className="p-4 rounded-2xl border" style={{ borderColor: colors.creme, backgroundColor: '#ffffff' }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: colors.creme, color: colors.rosa }}>
+                  <Activity size={20} />
+                </div>
+                <h4 className="font-serif font-medium text-slate-800">Residência Médica</h4>
+                <p className="text-sm text-slate-500">Clínica Médica — Hospital Central da Aeronáutica</p>
+              </div>
               <div className="p-4 rounded-2xl border" style={{ borderColor: colors.creme, backgroundColor: '#ffffff' }}>
                 <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: colors.creme, color: colors.lilas }}>
                   <Stethoscope size={20} />
                 </div>
                 <h4 className="font-serif font-medium text-slate-800">Graduação em Medicina</h4>
                 <p className="text-sm text-slate-500">Universidade Federal Fluminense</p>
-              </div>
-              <div className="p-4 rounded-2xl border" style={{ borderColor: colors.creme, backgroundColor: '#ffffff' }}>
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: colors.creme, color: colors.azul }}>
-                  <Activity size={20} />
-                </div>
-                <h4 className="font-serif font-medium text-slate-800">Residência Médica</h4>
-                <p className="text-sm text-slate-500">Endocrinologia e Metabologia - Universidade Estadual do Rio de Janeiro (UERJ)</p>
               </div>
             </div>
           </AnimatedSection>
@@ -339,29 +346,41 @@ const App = () => {
             <AnimatedSection direction="up" delay={0}>
               <div className="bg-white p-8 rounded-3xl h-full shadow-sm hover:shadow-md transition-shadow">
                 <h4 className="text-xl font-serif font-medium mb-4 flex items-center gap-3" style={{ color: colors.lilas }}>
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.azul }}></span>
-                  Metabolismo e Peso
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.rosa }}></span>
+                  Emagrecimento e Obesidade
                 </h4>
                 <ul className="space-y-3 text-slate-600 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Tratamento da Obesidade</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Dificuldade de Emagrecimento</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Síndrome Metabólica</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Ganho de Massa Magra</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Emagrecimento saudável e sustentável</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Pré e Pós-bariátrica</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Tratamento da obesidade com base científica e terapias modernas</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Avaliação de obesidade clínica e pré-clínica</li>
                 </ul>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection direction="up" delay={150}>
+            <AnimatedSection direction="up" delay={100}>
               <div className="bg-white p-8 rounded-3xl h-full shadow-sm hover:shadow-md transition-shadow">
                 <h4 className="text-xl font-serif font-medium mb-4 flex items-center gap-3" style={{ color: colors.lilas }}>
                   <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lilas }}></span>
-                  Doenças Crônicas
+                  Menopausa
                 </h4>
                 <ul className="space-y-3 text-slate-600 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Diabetes Tipo 1 e Tipo 2</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Pré-diabetes</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Colesterol Alto (Dislipidemia)</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Esteatose Hepática (Gordura no fígado)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Avaliação para reposição hormonal</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Investigação de fogachos, alterações de libido, sono e humor</li>
+                </ul>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={200}>
+              <div className="bg-white p-8 rounded-3xl h-full shadow-sm hover:shadow-md transition-shadow">
+                <h4 className="text-xl font-serif font-medium mb-4 flex items-center gap-3" style={{ color: colors.lilas }}>
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.azul }}></span>
+                  Pré-diabetes e Diabetes
+                </h4>
+                <ul className="space-y-3 text-slate-600 text-sm">
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Avaliação de alterações glicêmicas e resistência insulínica</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Acompanhamento personalizado (DM1, DM2 e gestacional)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Rastreamento de complicações e comorbidades</li>
                 </ul>
               </div>
             </AnimatedSection>
@@ -370,13 +389,56 @@ const App = () => {
               <div className="bg-white p-8 rounded-3xl h-full shadow-sm hover:shadow-md transition-shadow">
                 <h4 className="text-xl font-serif font-medium mb-4 flex items-center gap-3" style={{ color: colors.lilas }}>
                   <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.rosa }}></span>
-                  Hormônios e Ossos
+                  Dislipidemia e Gordura no Fígado
                 </h4>
                 <ul className="space-y-3 text-slate-600 text-sm">
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Hipotireoidismo e Hipertireoidismo</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Menopausa e Reposição Hormonal</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Osteoporose e Osteopenia</li>
-                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> SOP (Síndrome dos Ovários Policísticos)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Avaliação de colesterol e triglicerídeos</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Estratificação de risco cardiovascular</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Tratamento moderno da esteatose hepática</li>
+                </ul>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={400}>
+              <div className="bg-white p-8 rounded-3xl h-full shadow-sm hover:shadow-md transition-shadow">
+                <h4 className="text-xl font-serif font-medium mb-4 flex items-center gap-3" style={{ color: colors.lilas }}>
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lilas }}></span>
+                  Tireoide
+                </h4>
+                <ul className="space-y-3 text-slate-600 text-sm">
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Avaliação hormonal tireoidiana</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Investigação de nódulos</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.lilas }} /> Doenças autoimunes (Hashimoto e Graves)</li>
+                </ul>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={500}>
+              <div className="bg-white p-8 rounded-3xl h-full shadow-sm hover:shadow-md transition-shadow">
+                <h4 className="text-xl font-serif font-medium mb-4 flex items-center gap-3" style={{ color: colors.lilas }}>
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.azul }}></span>
+                  Outras Doenças Hormonais
+                </h4>
+                <ul className="space-y-3 text-slate-600 text-sm">
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Síndrome dos Ovários Policísticos (SOP)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Hirsutismo e acne</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Hipogonadismo (libido e função sexual)</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Nódulos de adrenal e hipófise</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.azul }} /> Alterações de prolactina</li>
+                </ul>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={600} className="lg:col-start-2">
+              <div className="bg-white p-8 rounded-3xl h-full shadow-sm hover:shadow-md transition-shadow">
+                <h4 className="text-xl font-serif font-medium mb-4 flex items-center gap-3" style={{ color: colors.lilas }}>
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.rosa }}></span>
+                  Osteoporose e Saúde Óssea
+                </h4>
+                <ul className="space-y-3 text-slate-600 text-sm">
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Avaliação da qualidade óssea</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Tratamento com terapias modernas</li>
+                  <li className="flex items-start gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: colors.rosa }} /> Avaliação do metabolismo de cálcio, fósforo e magnésio</li>
                 </ul>
               </div>
             </AnimatedSection>
