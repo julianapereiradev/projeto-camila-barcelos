@@ -158,8 +158,8 @@ const ReviewsCarousel = () => {
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Track */}
-      <div className="flex items-center justify-center gap-4 px-4">
+      {/* Track — altura fixa para evitar saltos no layout */}
+      <div className="flex items-center justify-center gap-4 px-4" style={{ height: '440px' }}>
         {getSlides().map((idx, pos) => (
           <div
             key={idx}
@@ -167,12 +167,17 @@ const ReviewsCarousel = () => {
               ? 'scale-100 opacity-100 z-10'
               : 'scale-90 opacity-40 hidden md:block'
               }`}
-            style={{ width: pos === 1 ? '340px' : '260px', maxWidth: '90vw' }}
+            style={{
+              width: pos === 1 ? '340px' : '260px',
+              height: pos === 1 ? '420px' : '320px',
+              maxWidth: '90vw',
+            }}
           >
             <img
               src={`${ASSET_BASE}/avaliacoes/avaliacao${idx + 1}.jpeg`}
               alt={`Avaliação de paciente ${idx + 1}`}
-              className="w-full h-auto object-contain"
+              className="w-full h-full object-contain"
+              style={{ backgroundColor: '#f9f4ef' }}
             />
           </div>
         ))}
