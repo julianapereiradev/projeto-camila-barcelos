@@ -102,7 +102,7 @@ const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border mb-4 rounded-2xl overflow-hidden transition-all duration-300" style={{ borderColor: isOpen ? colors.lilas : '#e2e8f0', backgroundColor: colors.branco }}>
+    <div className="mb-4 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm" style={{ backgroundColor: colors.branco }}>
       <button
         className="w-full text-left p-6 flex justify-between items-center font-serif text-lg focus:outline-none"
         onClick={() => setIsOpen(!isOpen)}
@@ -119,6 +119,99 @@ const FAQItem = ({ question, answer }) => {
         className={`px-6 text-slate-600 transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 pb-6 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
       >
         {answer}
+      </div>
+    </div>
+  );
+};
+
+// COMPONENTE DE CARROSSEL DE AVALIAÇÕES
+const ReviewsCarousel = () => {
+  const [current, setCurrent] = useState(0);
+  const total = 10;
+  const intervalRef = useRef(null);
+
+  const goTo = (index) => {
+    setCurrent((index + total) % total);
+  };
+
+  const startAuto = () => {
+    intervalRef.current = setInterval(() => {
+      setCurrent(prev => (prev + 1) % total);
+    }, 4000);
+  };
+
+  useEffect(() => {
+    startAuto();
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  const resetAuto = (index) => {
+    clearInterval(intervalRef.current);
+    goTo(index);
+    startAuto();
+  };
+
+  // Visíveis: current-1, current, current+1 (mobile: só current)
+  const getSlides = () => {
+    return [-1, 0, 1].map(offset => (current + offset + total) % total);
+  };
+
+  return (
+    <div className="relative w-full overflow-hidden">
+      {/* Track */}
+      <div className="flex items-center justify-center gap-4 px-4">
+        {getSlides().map((idx, pos) => (
+          <div
+            key={idx}
+            className={`transition-all duration-500 rounded-2xl overflow-hidden shadow-lg shrink-0 ${pos === 1
+              ? 'scale-100 opacity-100 z-10'
+              : 'scale-90 opacity-40 hidden md:block'
+              }`}
+            style={{ width: pos === 1 ? '340px' : '260px', maxWidth: '90vw' }}
+          >
+            <img
+              src={`${ASSET_BASE}/avaliacoes/avaliacao${idx + 1}.jpeg`}
+              alt={`Avaliação de paciente ${idx + 1}`}
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Botões de navegação */}
+      <button
+        onClick={() => resetAuto(current - 1)}
+        className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all hover:scale-110 z-20"
+        style={{ backgroundColor: colors.branco, color: colors.lilas }}
+        aria-label="Anterior"
+      >
+        <ChevronRight size={20} className="rotate-180" />
+      </button>
+      <button
+        onClick={() => resetAuto(current + 1)}
+        className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all hover:scale-110 z-20"
+        style={{ backgroundColor: colors.branco, color: colors.lilas }}
+        aria-label="Próximo"
+      >
+        <ChevronRight size={20} />
+      </button>
+
+      {/* Indicadores */}
+      <div className="flex justify-center gap-2 mt-6">
+        {Array.from({ length: total }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => resetAuto(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === current ? '24px' : '8px',
+              height: '8px',
+              backgroundColor: i === current ? colors.lilas : colors.rosa,
+              opacity: i === current ? 1 : 0.45,
+            }}
+            aria-label={`Ir para avaliação ${i + 1}`}
+          />
+        ))}
       </div>
     </div>
   );
@@ -169,6 +262,7 @@ const App = () => {
             <button onClick={() => scrollToSection('sobre')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Sobre mim</button>
             <button onClick={() => scrollToSection('tratamentos')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Tratamentos</button>
             <button onClick={() => scrollToSection('atendimento')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Atendimento</button>
+            <button onClick={() => scrollToSection('avaliacoes')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Avaliações</button>
             <button onClick={() => scrollToSection('faq')} className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: colors.azul }}>Dúvidas</button>
             <button
               onClick={() => scrollToSection('contato')}
@@ -197,6 +291,7 @@ const App = () => {
               <button onClick={() => scrollToSection('sobre')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Sobre mim</button>
               <button onClick={() => scrollToSection('tratamentos')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Tratamentos</button>
               <button onClick={() => scrollToSection('atendimento')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Atendimento</button>
+              <button onClick={() => scrollToSection('avaliacoes')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Avaliações</button>
               <button onClick={() => scrollToSection('faq')} className="text-left font-medium p-2" style={{ color: colors.azul }}>Dúvidas</button>
               <button
                 onClick={() => scrollToSection('contato')}
@@ -260,7 +355,7 @@ const App = () => {
               {/* Borda interna sutil e elegante */}
               <div className="absolute inset-0 border-2 border-white/30 rounded-3xl z-20 m-3 pointer-events-none"></div>
               <img
-                src={`${ASSET_BASE}/images/IMG_2557.jpg.jpg`}
+                src={`${ASSET_BASE}/profile/IMG_2557.jpg.jpg`}
                 alt="Dra. Camila Barcelos"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
               />
@@ -276,7 +371,7 @@ const App = () => {
           <AnimatedSection direction="left" className="order-2 md:order-1 relative">
             <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl" style={{ backgroundColor: colors.rosa, opacity: 0.3 }}></div>
             <img
-              src={`${ASSET_BASE}/images/IMG_2571.jpg.jpg`}
+              src={`${ASSET_BASE}/profile/IMG_2571.jpg.jpg`}
               alt="Dra. Camila Barcelos 2"
               className="relative z-10 w-full max-w-md mx-auto aspect-[4/5] object-cover rounded-3xl shadow-lg"
             />
@@ -458,42 +553,56 @@ const App = () => {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Presencial */}
-            <AnimatedSection direction="up" delay={100} className="rounded-3xl p-8 border-2 flex flex-col h-full" style={{ borderColor: colors.creme }}>
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: '#F0F4F8', color: colors.azul }}>
+            <AnimatedSection direction="up" delay={100} className="rounded-3xl p-8 border-2 flex flex-col h-full" style={{ borderColor: `${colors.rosa}60`, backgroundColor: colors.branco }}>
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ backgroundColor: `${colors.rosa}22`, color: colors.rosa }}>
                 <Building2 size={32} />
               </div>
-              <h4 className="text-2xl font-serif mb-3" style={{ color: colors.lilas }}>Consulta Presencial</h4>
+              <h4 className="text-2xl font-serif mb-3" style={{ color: colors.rosa }}>Consulta Presencial</h4>
               <p className="text-slate-600 mb-6 flex-grow">
-                Atendimento no consultório no <strong>Rio de Janeiro</strong>, com toda a estrutura necessária para avaliações físicas completas, como a bioimpedância.
+                Atendimento em consultório no <strong>Rio de Janeiro</strong> (Botafogo ou Barra), com toda a estrutura necessária para uma avaliação clínica completa.
               </p>
               <ul className="space-y-3 text-sm text-slate-700 mb-8 font-medium">
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }} /> Ambiente acolhedor e acessível</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }} /> Sem pressa no atendimento</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.azul }} /> Estacionamento no local</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.rosa }} /> Ambiente acolhedor e acessível</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.rosa }} /> Atendimento personalizado, sem pressa</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.rosa }} /> Avaliação física completa</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.rosa }} /> Bioimpedância</li>
               </ul>
-              <button onClick={() => scrollToSection('contato')} className="w-full py-3 rounded-full text-white font-medium transition-transform hover:scale-105" style={{ backgroundColor: colors.lilas }}>
+              <a
+                href="https://wa.me/5521995202426?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20consulta%20presencial%20com%20a%20Dra.%20Camila.%20Poderia%20me%20informar%20os%20hor%C3%A1rios%20dispon%C3%ADveis%3F"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 rounded-full text-white font-medium transition-transform hover:scale-105 flex items-center justify-center"
+                style={{ backgroundColor: colors.rosa }}
+              >
                 Agendar Presencial
-              </button>
+              </a>
             </AnimatedSection>
 
             {/* Teleconsulta */}
-            <AnimatedSection direction="up" delay={200} className="rounded-3xl p-8 flex flex-col h-full text-white relative overflow-hidden" style={{ backgroundColor: colors.azul }}>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-2xl"></div>
-              <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-6 backdrop-blur-sm">
+            <AnimatedSection direction="up" delay={200} className="rounded-3xl p-8 flex flex-col h-full relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${colors.lilas}18 0%, ${colors.rosa}28 100%)`, border: `2px solid ${colors.lilas}40` }}>
+              <div className="absolute top-0 right-0 w-56 h-56 rounded-full blur-3xl" style={{ backgroundColor: colors.rosa, opacity: 0.12 }}></div>
+              <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full blur-3xl" style={{ backgroundColor: colors.lilas, opacity: 0.1 }}></div>
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 relative z-10" style={{ backgroundColor: `${colors.lilas}22`, color: colors.lilas }}>
                 <Video size={32} />
               </div>
-              <h4 className="text-2xl font-serif mb-3">Teleconsulta</h4>
-              <p className="text-white/90 mb-6 flex-grow relative z-10">
-                Atendimento online para <strong>todo o Brasil</strong> e exterior. Ideal para pacientes de outras cidades, acompanhamentos contínuos e retornos.
+              <h4 className="text-2xl font-serif mb-3 relative z-10" style={{ color: colors.lilas }}>Teleconsulta</h4>
+              <p className="text-slate-600 mb-6 flex-grow relative z-10">
+                Atendimento online para <strong>todo o Brasil</strong> e exterior, com conforto e praticidade da sua casa.
               </p>
-              <ul className="space-y-3 text-sm text-white/90 mb-8 font-medium relative z-10">
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white" /> Disponível de qualquer lugar</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white" /> Receitas e pedidos de exames digitais</li>
-                <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-white" /> Conforto e praticidade da sua casa</li>
+              <ul className="space-y-3 text-sm text-slate-700 mb-8 font-medium relative z-10">
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.lilas }} /> Disponível de qualquer lugar</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.lilas }} /> Solicitação e envio de exames com orientação detalhada</li>
+                <li className="flex items-center gap-2"><CheckCircle2 size={18} style={{ color: colors.lilas }} /> Atendimento personalizado, sem pressa</li>
               </ul>
-              <button onClick={() => scrollToSection('contato')} className="w-full py-3 rounded-full font-medium transition-transform hover:scale-105 relative z-10" style={{ backgroundColor: colors.branco, color: colors.azul }}>
+              <a
+                href="https://wa.me/5521995202426?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20teleconsulta%20com%20a%20Dra.%20Camila.%20Poderia%20me%20informar%20os%20hor%C3%A1rios%20dispon%C3%ADveis%3F"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 rounded-full text-white font-medium transition-transform hover:scale-105 relative z-10 flex items-center justify-center"
+                style={{ backgroundColor: colors.lilas }}
+              >
                 Agendar Online
-              </button>
+              </a>
             </AnimatedSection>
           </div>
         </div>
@@ -512,19 +621,19 @@ const App = () => {
               <div>
                 <h4 className="font-bold text-lg mb-2 flex items-center gap-2" style={{ color: colors.lilas }}>
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.azul }}></div>
-                  Avaliação Global e Integrativa
+                  Avaliação global e integrativa
                 </h4>
                 <p>
-                  O foco é a sua saúde integral. Olhamos para muito além dos exames laboratoriais. Avaliamos seu sono, nível de estresse, rotina alimentar, histórico familiar e demandas emocionais, garantindo que você seja ouvida com paciência e respeito.
+                  O foco é a sua saúde como um todo. Vou além dos exames laboratoriais, investigando suas queixas, sono, nível de estresse, rotina alimentar, libido, histórico familiar e aspectos emocionais — com escuta atenta, respeito e acolhimento.
                 </p>
               </div>
               <div>
                 <h4 className="font-bold text-lg mb-2 flex items-center gap-2" style={{ color: colors.lilas }}>
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.azul }}></div>
-                  Plano Personalizado
+                  Plano personalizado
                 </h4>
                 <p>
-                  Ao final, traçamos um plano de ação conjunto. Não prescrevo dietas prontas ou tratamentos irreais; construímos estratégias viáveis que respeitem a sua rotina e que tragam resultados duradouros para sua saúde metabólica.
+                  Ao final, construímos juntas um plano de ação realista e individualizado. Sem fórmulas prontas, mas com estratégias viáveis que se encaixam na sua rotina e promovem resultados duradouros.
                 </p>
               </div>
               <div>
@@ -533,7 +642,7 @@ const App = () => {
                   Quando buscar apoio?
                 </h4>
                 <p>
-                  Se você sente cansaço constante, dificuldade de perder peso, alterações menstruais ou simplesmente deseja otimizar sua saúde e longevidade de forma preventiva, esse é o momento de ganharmos uma aliada na sua jornada de bem-estar.
+                  Se você apresenta cansaço, dificuldade para emagrecer, alterações menstruais, queda de libido, fogachos, exames alterados — ou deseja cuidar da sua saúde de forma preventiva e otimizar sua longevidade — este é o momento de ter uma aliada na sua jornada de bem-estar.
                 </p>
               </div>
             </div>
@@ -542,7 +651,7 @@ const App = () => {
           <AnimatedSection direction="right" delay={200} className="relative">
             <div className="aspect-square md:aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
               <img
-                src={`${ASSET_BASE}/images/IMG_2611.jpg.jpg`}
+                src={`${ASSET_BASE}/profile/IMG_2611.jpg.jpg`}
                 alt="Médica em consulta"
                 className="w-full h-full object-cover"
               />
@@ -554,8 +663,25 @@ const App = () => {
         </div>
       </section>
 
+      {/* AVALIAÇÕES DOS PACIENTES */}
+      <section id="avaliacoes" className="py-20 md:py-32 overflow-hidden" style={{ backgroundColor: colors.branco }}>
+        <div className="container mx-auto px-6 md:px-12">
+          <AnimatedSection direction="up" className="text-center max-w-2xl mx-auto mb-14">
+            <h2 className="text-sm font-bold tracking-widest uppercase mb-2" style={{ color: colors.azul }}>Avaliações</h2>
+            <h3 className="text-3xl md:text-4xl font-serif mb-4" style={{ color: colors.lilas }}>O que dizem minhas pacientes</h3>
+            <p className="text-slate-600">
+              Cada relato é um presente. Acompanhe algumas das experiências de quem já percorreu esse caminho comigo.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection direction="up" delay={150}>
+            <ReviewsCarousel />
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* FAQ SECTION */}
-      <section id="faq" className="py-20 md:py-32" style={{ backgroundColor: colors.branco }}>
+      <section id="faq" className="py-20 md:py-32" style={{ backgroundColor: 'rgb(252, 245, 234)' }}>
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-12 gap-12">
             <AnimatedSection direction="up" className="lg:col-span-4">
@@ -578,20 +704,60 @@ const App = () => {
             <AnimatedSection direction="up" delay={200} className="lg:col-span-8">
               <div className="space-y-4">
                 <FAQItem
-                  question="A Dra. atende por planos de saúde (convênio)?"
-                  answer="Meus atendimentos são particulares, pois prezo por consultas longas, humanizadas e sem a pressa imposta pelos planos. No entanto, fornecemos Nota Fiscal para que você possa solicitar o reembolso junto ao seu convênio médico, se o seu plano permitir."
+                  question="A Dra. atende por plano de saúde/convênio?"
+                  answer={<>
+                    <p className="mb-3">Meus atendimentos são particulares, pois priorizo consultas mais longas, humanizadas e sem a pressa imposta pelos planos de saúde. Com formação sólida e experiência clínica, estou preparada para cuidar de diversas condições endócrinas, sempre com o objetivo de promover mais saúde e qualidade de vida.</p>
+                    <p>Emitimos nota fiscal, possibilitando solicitação de reembolso junto ao convênio ou utilização para declaração no imposto de renda.</p>
+                  </>}
                 />
                 <FAQItem
-                  question="Como funciona a Teleconsulta?"
-                  answer="A teleconsulta é realizada por vídeo em uma plataforma segura e fácil de usar. Tem a mesma duração e qualidade da consulta presencial. Todas as receitas, laudos e pedidos de exames são enviados com certificação digital, sendo válidos em todo o território nacional."
+                  question="Como funciona a teleconsulta?"
+                  answer={<>
+                    <p className="mb-3">A telemedicina é regulamentada pela Lei nº 14.510/22, que autoriza e disciplina a prática da telessaúde em todo o território nacional.</p>
+                    <p className="mb-3">A teleconsulta é realizada por vídeo, em uma plataforma segura e de fácil acesso, sem necessidade de instalar aplicativos. O link é enviado previamente pelo WhatsApp. A consulta mantém a mesma duração, qualidade e cuidado do atendimento presencial.</p>
+                    <p className="mb-3">Na endocrinologia, especialmente no acompanhamento do emagrecimento, todo o protocolo pode ser adaptado para o formato online, sem prejuízo na avaliação. Quando necessário, são solicitados exames complementares que permitem uma análise metabólica completa.</p>
+                    <p>Receitas, laudos e pedidos de exames são emitidos com certificação digital, com validade em todo o Brasil.</p>
+                  </>}
                 />
                 <FAQItem
                   question="Preciso levar exames prontos na primeira consulta?"
-                  answer="Não é obrigatório! Na primeira consulta eu faço uma avaliação clínica profunda. Se você já tiver exames recentes (dos últimos 6 meses), leve-os. Caso não tenha, farei a solicitação dos exames específicos e necessários após entender o seu caso clínico."
+                  answer={<>
+                    <p className="mb-3"><strong>É OPCIONAL!</strong> Sempre realizo inicialmente uma avaliação clínica completa e detalhada nas consultas.</p>
+                    <p className="mb-3">Se você já tiver exames recentes (últimos 6 meses), é importante trazê-los. Exames mais antigos também ajudam a entender melhor o seu histórico de saúde.</p>
+                    <p>Caso não tenha, não se preocupe — após a consulta, solicitarei os exames necessários para o seu caso. A reavaliação é feita em até 45 dias para acompanhamento e definição das próximas condutas.</p>
+                  </>}
+                />
+                <FAQItem
+                  question="Como são as consultas de acompanhamento?"
+                  answer={<>
+                    <p className="mb-3">A frequência das consultas de acompanhamento varia conforme cada caso, considerando queixas clínicas, exames e tratamentos em uso. Os retornos podem ser mensais, trimestrais ou semestrais, sempre ajustados às necessidades de saúde e à realidade do paciente.</p>
+                    <p>O suporte médico via WhatsApp permanece disponível, permitindo acompanhamento de resultados e ajustes no plano terapêutico entre as consultas.</p>
+                  </>}
+                />
+                <FAQItem
+                  question="A Dra. fornece contato para dúvidas?"
+                  answer={<>
+                    <p className="mb-3">Sim. O contato direto comigo é disponibilizado desde a primeira consulta para dúvidas e acompanhamento de resultados.</p>
+                    <p>No entanto, é importante ressaltar que o WhatsApp não substitui a consulta médica, sendo utilizado com responsabilidade para preservar a segurança das informações e do seu cuidado.</p>
+                  </>}
+                />
+                <FAQItem
+                  question="Existe reembolso da consulta?"
+                  answer="Será disponibilizada, caso o paciente deseje, nota fiscal da consulta para solicitação de reembolso junto ao plano de saúde ou para declaração no imposto de renda."
+                />
+                <FAQItem
+                  question="Moro em outro estado, como receberei minhas receitas médicas?"
+                  answer={<>
+                    <p className="mb-3">Fique tranquilo! As receitas médicas têm validade em todo o território nacional. São emitidas com certificação digital e podem ser enviadas por e-mail ou WhatsApp.</p>
+                    <p>Você pode apresentá-las normalmente nas farmácias, tanto no formato digital quanto impresso.</p>
+                  </>}
                 />
                 <FAQItem
                   question="Quais as formas de pagamento?"
-                  answer="Aceitamos pagamentos via PIX, transferência bancária e cartões de crédito. Os detalhes podem ser confirmados diretamente com nossa equipe de agendamento via WhatsApp."
+                  answer={<>
+                    <p className="mb-3">Aceitamos pagamento via PIX. Também é possível pagar com cartão de débito ou crédito, com acréscimo de uma pequena taxa da operadora.</p>
+                    <p>Para mais detalhes, nossa equipe de agendamento está disponível pelo WhatsApp.</p>
+                  </>}
                 />
               </div>
             </AnimatedSection>
@@ -621,8 +787,18 @@ const App = () => {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h5 className="font-semibold text-lg">Endereço (Presencial)</h5>
-                    <p className="text-white/80">R. Visc. de Ouro Preto, 5 - Sala XXXX<br />Botafogo, Rio de Janeiro - RJ, 22250-180</p>
+                    <h5 className="font-semibold text-lg">Endereço (Presencial Botafogo)</h5>
+                    <p className="text-white/80">R. Visc. de Ouro Preto, 5 - Livance Botafogo<br />Botafogo, Rio de Janeiro - RJ, 22250-180</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: colors.branco, color: colors.lilas }}>
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-lg">Endereço (Presencial Barra)</h5>
+                    <p className="text-white/80">Av. João Cabral de Mello Neto, 850<br />Torre Norte - 10º andar<br />Barra da Tijuca, Rio de Janeiro - RJ, 22775-057</p>
                   </div>
                 </div>
 
@@ -632,7 +808,7 @@ const App = () => {
                   </div>
                   <div>
                     <h5 className="font-semibold text-lg">Horário de Atendimento</h5>
-                    <p className="text-white/80">Segunda a Sexta: 08:00 às 18:00</p>
+                    <p className="text-white/80">Segunda a Sexta: 09:00 às 20:00<br />Sábado: 09:00 às 13:00</p>
                   </div>
                 </div>
               </div>
@@ -641,7 +817,7 @@ const App = () => {
             <AnimatedSection direction="right" delay={200} className="lg:w-1/2 w-full relative z-10">
               <div className="bg-white rounded-3xl p-8 shadow-2xl">
                 <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ backgroundColor: colors.creme, color: colors.lilas }}>
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ backgroundColor: `${colors.lilas}22`, color: colors.lilas }}>
                     <Calendar size={32} />
                   </div>
                   <h3 className="text-2xl font-serif" style={{ color: colors.lilas }}>Agende seu Horário</h3>
@@ -684,6 +860,8 @@ const App = () => {
                   <li><button onClick={() => scrollToSection('sobre')} className="hover:text-slate-800">Sobre Mim</button></li>
                   <li><button onClick={() => scrollToSection('tratamentos')} className="hover:text-slate-800">Especialidades</button></li>
                   <li><button onClick={() => scrollToSection('atendimento')} className="hover:text-slate-800">Atendimento</button></li>
+                  <li><button onClick={() => scrollToSection('avaliacoes')} className="hover:text-slate-800">Pacientes</button></li>
+                  <li><button onClick={() => scrollToSection('faq')} className="hover:text-slate-800">FAQ</button></li>
                 </ul>
               </div>
 
