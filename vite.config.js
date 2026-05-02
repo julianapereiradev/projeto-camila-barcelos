@@ -2,11 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => ({
-  base: command === 'serve' ? '/' : '/projeto-camila-barcelos/',
+export default defineConfig({
+  base: '/', // <-- Caminho corrigido para a raiz
   plugins: [react()],
   build: {
-    outDir: 'docs',
+    outDir: 'docs', // Mantido como docs para bater com a configuração atual do Cloudflare
     rollupOptions: {
       output: {
         format: 'es',
@@ -17,4 +17,4 @@ export default defineConfig(({ command }) => ({
     port: 3000,
     strictPort: false,
   },
-}))
+})
