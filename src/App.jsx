@@ -654,11 +654,11 @@ const App = () => {
           </AnimatedSection>
 
           <AnimatedSection direction="right" delay={200} className="relative">
-            <div className="aspect-square md:aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+            <div className="aspect-[3/4] md:aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
               <img
                 src={`${ASSET_BASE}/profile/IMG_2611.jpg.jpg`}
                 alt="Médica em consulta"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             {/* Elementos Decorativos */}
@@ -857,7 +857,7 @@ const App = () => {
               </p>
             </div>
 
-            <div className="flex gap-16 text-center md:text-left">
+            <div className="flex flex-wrap gap-8 md:gap-16 text-center md:text-left justify-center md:justify-start">
               <div>
                 <h6 className="font-bold mb-4" style={{ color: colors.azul }}>Navegação</h6>
                 <ul className="space-y-2 text-sm text-slate-500">
