@@ -272,7 +272,7 @@ const HowItWorksSteps = () => {
           className="font-serif font-medium text-xl sm:text-2xl md:text-3xl leading-snug mb-2"
           style={{ color: colors.lilas }}
         >
-          Análise de como seu metabolismo reage aos seus hábitos
+          Melhor análise do seu metabolismo e hábitos
         </h4>
         <p className="text-xs sm:text-sm md:text-base text-slate-600 max-w-md leading-relaxed">
           Investigação aprofundada em consulta com mais de uma hora de duração
@@ -1343,7 +1343,7 @@ const App = () => {
                 className="w-full py-3 rounded-full text-white font-medium transition-transform hover:scale-105 flex items-center justify-center"
                 style={{ backgroundColor: colors.rosa }}
               >
-                Agendar Presencial
+                Agendar consulta particular
               </a>
             </AnimatedSection>
 
@@ -1398,7 +1398,7 @@ const App = () => {
                 className="w-full py-3 rounded-full text-white font-medium transition-transform hover:scale-105 relative z-10 flex items-center justify-center"
                 style={{ backgroundColor: colors.lilas }}
               >
-                Agendar Online
+                Agendar consulta particular
               </a>
             </AnimatedSection>
           </div>
